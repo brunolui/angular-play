@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="redditList">
+<head>    
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	
+	<title>Redit Angular API</title>
+</head>
+<body ng-controller="redditController">
+
+	<h2>{{title}}</h2> 
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th>Title</th>
+	      <th>Author</th>
+	      <th>Created At</th>
+	    </tr>
+	  </thead>
+	
+	   <tbody>
+	      <tr ng-repeat="post in posts">
+		
+	        <td> <reddit-post post-object="post"></reddit-post></td>
+	        <td>{{post.data.title}}</td>
+	        <td>{{post.data.author}}</td>
+	        <td>{{post.data.created}}</td>
+	
+	      </tr>
+	    </tbody>
+	</table>
+	
+	
+</body>
+</html>
