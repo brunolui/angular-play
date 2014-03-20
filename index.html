@@ -9,12 +9,12 @@
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	
-	<title>Redit Angular API</title>
+	<title>Reddit Posts in AngularJS</title>
 </head>
 <body ng-controller="redditController">
 
-	<h2>{{title}}</h2> 
-	
+	<h2>Favorites</h2> 
+
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -26,17 +26,58 @@
 	  </thead>
 	
 	   <tbody>
-	      <tr ng-repeat="post in posts">
+	      <tr ng-repeat="favorite in favorites">
 		
-	        <td> <reddit-post post-object="post"></reddit-post></td>
-	        <td>{{post.data.title}}</td>
-	        <td>{{post.data.author}}</td>
-	        <td>{{post.data.created}}</td>
-	
+	        <td><look-post postagem="favorite"></look-post></td>
+	        <td>{{favorite.data.title}}</td>
+	        <td>{{favorite.data.author}}</td>
+	        <td>{{favorite.data.created | date}}</td>
+			<td>
+				<button type="button" class="btn btn-danger" ng-click="desfavoritar(post)">
+        		Unfavorite
+    			</button>
+			</td>
 	      </tr>
 	    </tbody>
 	</table>
+
+	<h2>{{title}}</h2> 
 	
+	<input type="text" placeholder="Search" ng-model="selected"
+	typeahead="title as post.title for post in posts | filter:$viewValue | limitTo:8" 
+	class="form-control">
+
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th>Title</th>
+	      <th>Author</th>
+	      <th>Created At</th>
+	      <th>&nbsp;</th>
+	    </tr>
+	  </thead>
 	
+	   <tbody>
+	      <tr ng-repeat="post in posts">
+			<td><look-post postagem="post"></look-post></td>
+	        <td>{{post.data.title}}</td>
+	        <td>{{post.data.author}}</td>
+	        <td>{{post.data.created | date}}</td>
+			<td>
+				<button type="button" class="btn btn-info" ng-click="favoritar(post)">
+        		Favorite
+    			</button>
+			</td>
+	      </tr>
+	    </tbody>
+	</table>	
+
+	<script type="text/ng-template" id="modal.html">
+	  	<h4>Post: {{post.data.title}}</h4>
+		<a href="{{post.data.url}}" target="_blank">
+		  <img src="{{post.data.thumbnail}}"></img>
+		</a>
+	</script>
 </body>
 </html>
