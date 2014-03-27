@@ -10,12 +10,15 @@ redditList.controller('redditController', function($scope, Reddit) {
 	});
 
 	$scope.favoritar = function(post) {
-		$scope.favorites.push(post);
+		$scope.favorites.push(post);    
 	};
 	
 	$scope.desfavoritar = function(post) {
-		$scope.favorites.pop(post);
+    var x = $scope.favorites.indexOf(post);
+    console.log(x);
+		$scope.favorites.splice(x , 1 );
 	};
+
 });
 
 redditList.factory("Reddit", function($http){
